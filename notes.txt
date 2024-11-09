@@ -1,0 +1,7 @@
+why wee need package.json 
+
+it fullfill all the dependency
+
+** bundler => help us to bundel our app 
+
+1.dev dependency 2.normal dependency

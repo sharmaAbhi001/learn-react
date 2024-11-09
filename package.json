@@ -1,0 +1,35 @@
+{
+  "name": "react",
+  "version": "1.0.0",
+  "description": "this my react learning",
+  "main": "App.js",
+  "scripts": {
+    "start" : "parcel index.html",
+    "build" : "parcel build index.html",
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sharmaAbhi001/learn-react.git"
+  },
+  "keywords": [
+    "react",
+    "abhi"
+  ],
+  "author": "Abhi",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sharmaAbhi001/learn-react/issues"
+  },
+  "homepage": "https://github.com/sharmaAbhi001/learn-react#readme",
+  "devDependencies": {
+    "@types/react": "^18.3.12",
+    "@types/react-dom": "^18.3.1",
+    "parcel": "^2.12.0",
+    "process": "^0.11.10"
+  },
+  "dependencies": {
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
+  }
+}
