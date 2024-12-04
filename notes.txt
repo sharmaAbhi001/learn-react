@@ -5,3 +5,13 @@ it fullfill all the dependency
 ** bundler => help us to bundel our app 
 
 1.dev dependency 2.normal dependency
+
+Two Type of exports 
+deafult import export 
+export deafult name;
+import name from "src"
+
+named exports
+
+export name 
+impot {name } from "src"

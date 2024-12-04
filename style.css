@@ -68,3 +68,32 @@ padding: 30px;
 .info{
     height: 60px;
 }
+
+.btn{
+    display: flex;
+    gap: 30px;
+    margin: 30px;
+}
+
+.simmerContainer{
+    display: flex;
+    flex-wrap: wrap;
+    padding-left: 74px;
+}
+.simmerCard{
+    margin: 20px 20px;
+    background-color: #f3ebeb;
+    width: 300px;
+    height: 300px;
+    border-radius: 15px;
+    transition: all 0.3s ease; /* Smooth transition for all properties */
+}
+
+.simmerCard:hover {
+    transform: scale(0.9); /* Scale the card up to 105% */
+    cursor: pointer; /* Change cursor to pointer */
+}
+
+.loginbtn{
+    padding: 10px;
+}
