@@ -97,3 +97,12 @@ padding: 30px;
 .loginbtn{
     padding: 10px;
 }
+.about{
+    margin-top: 20px;
+}
+.user-about{
+    width: 200px;
+    height: 300px;
+    border: 2px solid black;
+    padding: 10px;
+}

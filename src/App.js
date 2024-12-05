@@ -1,19 +1,53 @@
 import React from "react";
+// import { BrowserRouter as Router, RouterProvider } from "react-router-dom";
+import {createBrowserRouter,RouterProvider,Outlet } from "react-router";
 import ReactDOM from "react-dom/client";
 import Header from "./components/Header";
 import Body from "./components/Body";
+import About from "./components/About";
+import Error from "./components/Error";
+import Contact from "./components/Contact";
+import ResturentInfo from "./components/ResturentInfo";
+
 
 // big level container contain all the things
 const Applayout = () => {
   return (
     <div className="App">
       <Header />
-      <Body />
+     <Outlet/>
     </div>
   );
 };
 
+const appRouter = createBrowserRouter([
+  {
+    path:"/",
+    element:<Applayout/>,
+    children:[
+      {
+        path:"/",
+        element:<Body/>
+      },
+      {
+        path:"/about",
+        element:<About/>
+      },
+      {
+        path:"/contact",
+        element:<Contact/>
+      },
+      {
+        path:"/resturent/:resId",
+        element:<ResturentInfo/>
+      }
+    ],
+    errorElement:<Error/>
+  },
+ 
+]);
+
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
-// Invoke the function Fn to render its return value
-root.render(<Applayout />); // to render the component
+
+root.render(<RouterProvider router={appRouter}/>); 

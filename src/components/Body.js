@@ -1,6 +1,7 @@
 import Card from "./Card";
 import Simmmer from "./simmer";
 import { useState, useEffect } from "react";
+import { Link } from "react-router";
 
 const Body = () => {
   const [resCard, setResCard] = useState([]);
@@ -13,11 +14,11 @@ const Body = () => {
   }, []);
   const fetchData = async () => {
     const response = await fetch(
-      "https://www.swiggy.com/dapi/restaurants/list/v5?lat=26.87560&lng=80.91150&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING"
+      "https://www.swiggy.com/dapi/restaurants/list/v5?lat=26.7605545&lng=83.3731675&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING"
     );
     const json = await response.json();
     const restaurantData =
-      json.data?.cards[2]?.card?.card?.gridElements?.infoWithStyle?.restaurants;
+      json.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle?.restaurants;
     setResCard(restaurantData || []);
     setfilterResCard(restaurantData || []);
   };
@@ -35,9 +36,11 @@ const Body = () => {
     setfilterResCard(filterCard);
   };
 
-  if (resCard.length === 0) {
+  if (filterResCard.length === 0) {
     return <Simmmer />;
   }
+
+
   return (
     <div className="container">
       <div className="btn">
@@ -63,7 +66,7 @@ const Body = () => {
       </div>
       <div className="card-container">
         {filterResCard.map((restaurant) => (
-          <Card key={restaurant.info.id} resData={restaurant} />
+          <Link key={restaurant.info.id} to={"/resturent/"+restaurant.info.id}><Card  key={restaurant.info.id} resData={restaurant} /></Link>
         ))}
       </div>
     </div>
