@@ -13,24 +13,23 @@ const Card = (props) => {
     } = resData.info
     
     return (
-      <div className="crad">
-        <div className="card-logo">
-          <img
+      <div className="p-4 w-[300px] h-[300px] rounded-xl transform transition-transform hover:scale-95">
+          <img className="object-cover p-[5px] rounded-xl w-full h-[160px] drop-shadow-md transition-shadow group-hover:drop-shadow-lgshadow-lg"
             alt="meghna"
             src={
               CDN_URL +
              cloudinaryImageId
             }
           ></img>
-        </div>
-        <div className="info">
           <h2>{name}</h2>
           <p>{cuisines.join(", ")}</p>
           <p>{costForTwo}</p>
           <p>{avgRating}</p>
-        </div>
       </div>
     );
   };
+
+
+  // higher order function 
 
   export default Card;

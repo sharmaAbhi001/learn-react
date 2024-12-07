@@ -1,57 +1,50 @@
-import { useEffect ,useState } from "react";
 import Simmmer from "./simmer";
 import { useParams } from "react-router";
-import { MENUE_API } from "../utils/constenets";
+import useResturentMenue from "../utils/useResturentMenue";
+import ResturentCategories from "./ResturentCategories";
 
-const ResturentInfo=()=>{
+const ResturentInfo = () => {
+  const { resId } = useParams();
 
-    const [resInfo,setResInfo] = useState(null);
-     const {resId} = useParams()
+  const resInfo = useResturentMenue(resId);
+
+  if (resInfo === null) {
+    return <Simmmer />;
+  }
+
+  const { name, cuisines, costForTwoMessage } =
+    resInfo.data?.cards[2]?.card?.card?.info;
+
+  
+      const categories = resInfo?.data?.cards?.[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards.filter((c)=> c.card?.card?.["@type"]==="type.googleapis.com/swiggy.presentation.food.v2.ItemCategory")
+
+      // console.log(categories);
+  
+      
+      
+
+  return (
+    <div className="text-center my-6">
+      <h1 className="my-2 font-bold text-2xl ">{name}</h1>
+      <p>
+        {cuisines.join(", ")} {costForTwoMessage}
+      </p>
+    {/* {
+      categories.map((category)=> (
+         <ResturentCategories data={category?.card?.card} />
+      ))
+      } */}
+
+{
+categories.map((category) => (
+   <ResturentCategories key={category?.card?.card?.title} data={category?.card?.card} />
+))
+}
 
      
-
-    useEffect(()=>{
-        fetchMenue();
-    },[]);
-
- // fetach menue and other data from api 
-
- const fetchMenue = async () =>{
-
-    const data = await fetch(MENUE_API + resId);
-    const json = await data.json();
-    setResInfo(json);
- }
-
-
-
-
-if(resInfo===null)
-{
-    return <Simmmer/>
-}
-
-const {name ,cloudinaryImageId,cuisines,costForTwoMessage } = resInfo.data?.cards[2]?.card?.card?.info;
-
-// const itemCard = resInfo?.data?.cards?.[5]?.groupedCard?.cardGroupMap?.REGULAR?.cards?.[2]?.card?.card?.itemCards;
-
-
-return(
-    <div className="resturentInfo">
-        <h1>{name}</h1>
-        <p>{cuisines.join(", ")}-{costForTwoMessage}</p>
-        <h2>Menue</h2>
-        <ul>
-        {/* {itemCard.map((item)=>(
-            <li key={item.card.info.id}>
-                {item.card.info.name} -  Rs {item.card.info.defaultPrice/100}
-            </li>
-        ))} */}
-        </ul>
-        
+  
     </div>
-);
-}
-
+  );
+};
 
 export default ResturentInfo;
