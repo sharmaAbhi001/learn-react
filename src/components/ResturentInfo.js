@@ -1,3 +1,4 @@
+import { useState } from "react";
 import Simmmer from "./simmer";
 import { useParams } from "react-router";
 import useResturentMenue from "../utils/useResturentMenue";
@@ -7,6 +8,8 @@ const ResturentInfo = () => {
   const { resId } = useParams();
 
   const resInfo = useResturentMenue(resId);
+  const [showIndex,setShowIndex] = useState(0);
+
 
   if (resInfo === null) {
     return <Simmmer />;
@@ -15,13 +18,14 @@ const ResturentInfo = () => {
   const { name, cuisines, costForTwoMessage } =
     resInfo.data?.cards[2]?.card?.card?.info;
 
-  
-      const categories = resInfo?.data?.cards?.[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards.filter((c)=> c.card?.card?.["@type"]==="type.googleapis.com/swiggy.presentation.food.v2.ItemCategory")
+  const categories =
+    resInfo?.data?.cards?.[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards.filter(
+      (c) =>
+        c.card?.card?.["@type"] ===
+        "type.googleapis.com/swiggy.presentation.food.v2.ItemCategory"
+    );
 
-      // console.log(categories);
-  
-      
-      
+  // console.log(categories);
 
   return (
     <div className="text-center my-6">
@@ -29,20 +33,15 @@ const ResturentInfo = () => {
       <p>
         {cuisines.join(", ")} {costForTwoMessage}
       </p>
-    {/* {
-      categories.map((category)=> (
-         <ResturentCategories data={category?.card?.card} />
-      ))
-      } */}
-
-{
-categories.map((category) => (
-   <ResturentCategories key={category?.card?.card?.title} data={category?.card?.card} />
-))
-}
-
-     
-  
+      
+      {categories.map((category,index) => (
+        <ResturentCategories
+          key={category?.card?.card?.title}
+          data={category?.card?.card}
+          showItem={showIndex===index?true:false}
+          setShowIndex = {()=>setShowIndex(index)}
+        />
+      ))}
     </div>
   );
 };

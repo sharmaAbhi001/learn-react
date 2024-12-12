@@ -1,5 +1,9 @@
 import { useState } from "react";
 import { CDN_URL } from "../utils/constenets";
+
+
+
+
 const ItemList = (props) =>{
 
    const {items} = props;
@@ -7,8 +11,9 @@ const ItemList = (props) =>{
 
     return(
         <div>
-            {items.map((item)=>( 
-               <div className=" text-left flex justify-between border-b-2 m-2 p-2">
+            {items.map((item)=>(  
+               
+               <div key={item.card?.info?.id}  className=" text-left flex justify-between border-b-2 m-2 p-2">
                  <div className="w-9/12">
                 <div className="font-bold">
                     <span>{item.card?.info?.name } -</span>

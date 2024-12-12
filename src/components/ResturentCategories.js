@@ -2,16 +2,27 @@ import { useState } from "react";
 import ItemList from "./ItemList";
 
 
-const ResturentCategories = (props)=>{
+const ResturentCategories = ({data,showItem,setShowIndex})=>{
 
-const [showItem,SetShowItem] = useState(false);
-
-  const {data}= props;
 //  console.log(data.itemCards);
 
-const handelClick =()=>{
-SetShowItem(!showItem)
-}
+const [show2,setShow2] = useState(true);
+
+
+ console.log(showItem);
+
+ const handelClick = ()=>{
+   if(showItem===true)
+   {
+      setShow2(!show2); 
+   }
+  if(showItem===false)
+  {
+      setShow2(true);
+      setShowIndex();
+   }
+  
+ }
  
 
     return(
@@ -19,9 +30,9 @@ SetShowItem(!showItem)
         <div className="w-6/12 mx-auto my-6  shadow-lg bg-gray-50 p-2 ">
            <div className="flex justify-between font-bold text-xl cursor-pointer" onClick={handelClick} >
            <span>{data.title} ({data.itemCards.length})</span>
-           <span>⬇️</span>
+           <span>^</span>
            </div>
-           {showItem && <ItemList items={data.itemCards}/>}
+           {show2&&showItem && <ItemList items={data.itemCards}/>}
         </div>
        </div>
     )
