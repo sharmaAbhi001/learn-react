@@ -1,4 +1,6 @@
 import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { addItem,removeItem } from "../utils/cartSlice";
 import { CDN_URL } from "../utils/constenets";
 
 
@@ -7,6 +9,12 @@ import { CDN_URL } from "../utils/constenets";
 const ItemList = (props) =>{
 
    const {items} = props;
+
+   const dispatch =useDispatch();
+
+   const handelAddItem =(item)=>{
+       dispatch(addItem(item))
+   }
 
 
     return(
@@ -23,7 +31,9 @@ const ItemList = (props) =>{
                 </div>
                 <div className="w-3/12 p-4">
                 <div className="absolute">
-                <button className="mt-[6.5rem] bg-white text-green-500 ml-[1.5rem] px-4 py-1 rounded-lg font-bold drop-shadow-md ">add+</button>
+                <button className="mt-[6.5rem] bg-white text-green-500 ml-[1.5rem] px-4 py-1 rounded-lg font-bold drop-shadow-md "
+                onClick={()=>handelAddItem(item)}
+                >add+</button>
                 </div>
                 <img className=" w-[120px] h-[120px] rounded-lg border-black " src={CDN_URL+item.card?.info?.imageId}></img>
                 </div>

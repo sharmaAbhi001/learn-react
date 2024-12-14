@@ -1,4 +1,5 @@
 import { LOGO_URL } from "../utils/constenets";
+import { useSelector } from "react-redux";
 import { Link } from "react-router";
 import { useState,useEffect } from "react";
 import useOnlineStatus from "../utils/useOnlineStatus";
@@ -6,9 +7,13 @@ import useOnlineStatus from "../utils/useOnlineStatus";
 
 const Header = () => {
 
+  const cartIems =useSelector((state) => state.cart.items);
+  console.log(cartIems);
+  
   const     [toggleButten,settoggleButten]  = useState("Login");
 
   const onlineStatus = useOnlineStatus()
+
 
   // function for toggle button
   const toggleButtenHandler = () =>{
@@ -36,6 +41,7 @@ const Header = () => {
             <li><Link to="/about">About</Link></li>
             <li><Link to="/contact">Contact</Link></li>
             <li><Link to="/grocery">Grocery</Link></li>
+            <li><Link to="/cart">Cart({cartIems.length})items</Link></li>
             <button className="loginbtn" onClick={toggleButtenHandler}>{toggleButten}</button>
           </ul>
         </div>
