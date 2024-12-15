@@ -1,6 +1,6 @@
 import useResturentCard from "../utils/useResturentCard";
 import Card from "./Card";
-import Simmmer from "./simmer";
+import Simmmer from "./Simmer";
 import { useEffect, useState } from "react";
 import { Link } from "react-router";
 import useOnlineStatus from "../utils/useOnlineStatus";
