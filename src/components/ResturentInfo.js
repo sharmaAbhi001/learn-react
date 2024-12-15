@@ -1,5 +1,5 @@
 import { useState } from "react";
-import Simmmer from "./simmer";
+import Simmer from "./Simmer";
 import { useParams } from "react-router";
 import useResturentMenue from "../utils/useResturentMenue";
 import ResturentCategories from "./ResturentCategories";
@@ -12,7 +12,7 @@ const ResturentInfo = () => {
 
 
   if (resInfo === null) {
-    return <Simmmer />;
+    return <Simmer />;
   }
 
   const { name, cuisines, costForTwoMessage } =

@@ -1,6 +1,6 @@
 import useResturentCard from "../utils/useResturentCard";
 import Card from "./Card";
-import Simmmer from "./Simmer";
+import Simmer from "./Simmer";
 import { useEffect, useState } from "react";
 import { Link } from "react-router";
 import useOnlineStatus from "../utils/useOnlineStatus";
@@ -24,7 +24,7 @@ const Body = () => {
   }
 
   if (filterResCard.length === 0) {
-    return (<Simmmer />);
+    return (<Simmer />);
   }
 
   // function for filter card on the basis of name
