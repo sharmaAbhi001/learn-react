@@ -3,7 +3,7 @@
 const Grocery = ()=>{
 
     return(
-        <h1>jal hi add kiya jayega dosto</h1>
+        <h1>jald hi add kiya jayega dosto</h1>
     )
 
 }
