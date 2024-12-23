@@ -8,9 +8,9 @@ import useOnlineStatus from "../utils/useOnlineStatus";
 const Body = () => {
  
 
-   const [resCard,setResCard] = useState([]);
-  const [filterResCard, setfilterResCard] = useState([]);
-  const [searchText, setsearchText] = useState("");
+  const [resCard, setResCard] = useState([]);
+  const [filterResCard, setFilterResCard] = useState([]);
+  const [searchText, setSearchText] = useState("");
   const [error, setError] = useState(null); // Track errors
 
   const onlineStatus = useOnlineStatus();
@@ -31,42 +31,45 @@ const Body = () => {
       }
 
       const json = await response.json();
-      
+
       const restaurantData =
-        json.data?.cards[2]?.card?.card?.gridElements?.infoWithStyle?.restaurants;
-         
-        
-        setResCard(restaurantData||[]);
-        setfilterResCard(restaurantData||[])
+        json.data?.cards?.[2]?.card?.card?.gridElements?.infoWithStyle?.restaurants;
+
+      if (!restaurantData || restaurantData.length === 0) {
+        throw new Error("No restaurant data found");
+      }
+
+      setResCard(restaurantData);
+      setFilterResCard(restaurantData);
     } catch (err) {
       console.error("Failed to fetch restaurant cards:", err);
-      setError(err.message); // Update error state
+      setError(err.message); 
     }
   };
 
 
-  
-  
   if (!onlineStatus) {
-    return <h1>Look Like you are offline Check your internet connection</h1>
+    return <h1>Looks like you're offline. Check your internet connection.</h1>;
   }
 
-  if (filterResCard.length === 0) {
-    return (<Simmer />);
+  if (error) {
+    return <h1>Error: {error}</h1>;
   }
 
-  // function for filter card on the basis of name
+  if (resCard.length === 0) {
+    return <Simmer />;
+  }
+
   const filterResName = () => {
     const searchFilterResCard = resCard.filter((res) =>
       res.info.name.toLowerCase().includes(searchText.toLowerCase())
     );
-    setfilterResCard(searchFilterResCard);
+    setFilterResCard(searchFilterResCard);
   };
 
-  // function for filter on the basis of rating
   const ratingFilter = () => {
     const filterCard = resCard.filter((res) => res.info.avgRating >= 4);
-    setfilterResCard(filterCard);
+    setFilterResCard(filterCard);
   };
 
   return (
