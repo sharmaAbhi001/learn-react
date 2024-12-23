@@ -1,9 +1,17 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: ["./src/**/*.{html,js,jsx,ts,tsx}",],
+  content: [
+    "./src/**/*.{js,jsx,ts,tsx}",
+    "./public/index.html"
+  ],
+  safelist: [
+    "fa-solid",
+    "fa-bars",
+    "fa-xmark"
+  ],
   theme: {
     extend: {},
   },
   plugins: [],
-}
+};
 

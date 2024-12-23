@@ -7,6 +7,12 @@ import useOnlineStatus from "../utils/useOnlineStatus";
 
 const Header = () => {
 
+   const [nav, setNav] = useState(false);
+  
+    const showNav = () => {
+      setNav(!nav);
+    };
+
   const cartIems =useSelector((state) => state.cart.items);
   console.log(cartIems);
   
@@ -27,15 +33,15 @@ const Header = () => {
   };
 
     return (
-      <div className="header flex justify-between w-lvw h-[80px] bg-green-300">
+      <div className="bg-gray-100 flex justify-around items-center py-[25px] border-2 border-b-black ">
         <div className="logo">
           <img className="w-20 ml-2"
             src={LOGO_URL}
             alt="logo-img"
           ></img>
         </div>
-        <div className="nav-item w-1/2 flex justify-center items-center ">
-          <ul className="flex p-4 m-4 gap-8">
+        {/* for desktop */}
+        <nav className="nav-item hidden md:flex gap-5">
             <li> Online Status {onlineStatus ? "✅" :"🔴" }</li>
             <li><Link to="/">Home</Link></li>
             <li><Link to="/about">About</Link></li>
@@ -43,8 +49,38 @@ const Header = () => {
             <li><Link to="/grocery">Grocery</Link></li>
             <li><Link to="/cart">Cart({cartIems.length})items</Link></li>
             <button className="loginbtn" onClick={toggleButtenHandler}>{toggleButten}</button>
-          </ul>
-        </div>
+        </nav>
+          
+           {/* hamburger */}
+        {nav ? (
+          // close button
+          <i
+            className="fixed right-[30px] fa fa-times text-3xl z-50 md:hidden"
+            aria-hidden="true"
+            onClick={showNav}
+          ></i>
+        ) : (
+          <i
+            className="fa fa-bars  md:hidden text-3xl "
+            aria-hidden="true"
+            onClick={showNav}
+          ></i>
+        )}
+
+
+         {/* for mobile */}
+        <nav  className={`h-[50vh] fixed top-[0] flex flex-col justify-around items-center w-3/6 md:hidden bg-white bg-opacity-50 z-40 duration-1000 ${
+            nav ? "right-[0px]" : "right-[-100vw]"
+          } `}>
+            <li> Online Status {onlineStatus ? "✅" :"🔴" }</li>
+            <li><Link to="/">Home</Link></li>
+            <li><Link to="/about">About</Link></li>
+            <li><Link to="/contact">Contact</Link></li>
+            <li><Link to="/grocery">Grocery</Link></li>
+            <li><Link to="/cart">Cart({cartIems.length})items</Link></li>
+            <button className="loginbtn" onClick={toggleButtenHandler}>{toggleButten}</button>
+        </nav>
+
       </div>
     );
   };

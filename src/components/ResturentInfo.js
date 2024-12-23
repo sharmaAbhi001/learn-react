@@ -1,5 +1,4 @@
 import { useState } from "react";
-import Simmer from "./Simmer";
 import { useParams } from "react-router";
 import useResturentMenue from "../utils/useResturentMenue";
 import ResturentCategories from "./ResturentCategories";
