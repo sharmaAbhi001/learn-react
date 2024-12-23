@@ -32,7 +32,7 @@ const Header = () => {
   };
 
     return (
-      <div className="bg-gray-100 flex justify-around items-center py-[25px] border-2 border-b-black ">
+      <div className="bg-gray-100 flex justify-around items-center py-[25px]">
         <div className="logo">
           <img className="w-20 ml-2"
             src={LOGO_URL}

@@ -20,18 +20,19 @@ const ResturentInfo = () => {
   const { name, cuisines, costForTwoMessage } =
     resInfo.data?.cards[2]?.card?.card?.info;
 
-  const categories =
-    resInfo?.data?.cards?.[5]?.groupedCard?.cardGroupMap?.REGULAR?.cards.filter(
+    const categories =
+    resInfo?.data?.cards?.find(
+      (card) =>
+        card?.groupedCard?.cardGroupMap?.REGULAR?.cards?.some(
+          (c) =>
+            c.card?.card?.["@type"] ===
+            "type.googleapis.com/swiggy.presentation.food.v2.ItemCategory"
+        )
+    )?.groupedCard?.cardGroupMap?.REGULAR?.cards?.filter(
       (c) =>
         c.card?.card?.["@type"] ===
         "type.googleapis.com/swiggy.presentation.food.v2.ItemCategory"
-    )||[];
-
-
-  if(categories ===null)
-  {
-    return <Simmer/>
-  }
+    )
     
 
 

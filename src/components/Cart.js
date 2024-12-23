@@ -14,7 +14,7 @@ const Cart = ()=>{
    }
 
 return (
-    <div className="w-6/12 text-center mx-auto my-3 p-3 ">
+    <div className=" w-5/6 md:w-6/12 text-center mx-auto my-3 p-3 ">
         <h1 className="font-bold ">Cart hu mai </h1>
         <button className="m-3 p-3 bg-black rounded-lg text-white font-bold" 
         onClick={handelClearCart}

@@ -11,53 +11,58 @@ const Body = () => {
   const [resCard, setResCard] = useState([]);
   const [filterResCard, setFilterResCard] = useState([]);
   const [searchText, setSearchText] = useState("");
-  const [error, setError] = useState(null); // Track errors
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   const onlineStatus = useOnlineStatus();
 
-
   useEffect(() => {
-    fetchCard();
+      fetchCard();
   }, []);
 
   const fetchCard = async () => {
     try {
+      setIsLoading(true);
+  
       const response = await fetch(
         "https://www.swiggy.com/dapi/restaurants/list/v5?lat=26.7605545&lng=83.3731675&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING"
       );
-
+  
       if (!response.ok) {
         throw new Error(`HTTP error! Status: ${response.status}`);
       }
-
+  
       const json = await response.json();
+  
+      const restaurantData = json?.data?.cards?.find(
+        (card) => card?.card?.card?.gridElements?.infoWithStyle?.restaurants
+      )?.card?.card?.gridElements?.infoWithStyle?.restaurants;
 
-      const restaurantData =
-        json.data?.cards?.[2]?.card?.card?.gridElements?.infoWithStyle?.restaurants;
-
+  
       if (!restaurantData || restaurantData.length === 0) {
         throw new Error("No restaurant data found");
       }
-
+  
       setResCard(restaurantData);
       setFilterResCard(restaurantData);
     } catch (err) {
       console.error("Failed to fetch restaurant cards:", err);
-      setError(err.message); 
+      setError(err.message);
+    } finally {
+      setIsLoading(false);
     }
   };
-
 
   if (!onlineStatus) {
     return <h1>Looks like you're offline. Check your internet connection.</h1>;
   }
 
-  if (error) {
-    return <h1>Error: {error}</h1>;
+  if (isLoading) {
+    return <Simmer />;
   }
 
-  if (resCard.length === 0) {
-    return <Simmer />;
+  if (error) {
+    return <h1>Error: {error}</h1>;
   }
 
   const filterResName = () => {
@@ -76,25 +81,25 @@ const Body = () => {
     <div className="container">
       <div className="btn flex">
         {/* // filter on the basis of search */}
-        <div className="searchFilter m-4 p-4">
+        <div className="searchFilter h-[150px] md:h-[65px] flex flex-col justify-around md:flex-row m-4 p-4">
           <input
             type="text"
             className="border border-solid rounded-md mr-2 border-black"
             placeholder="search Resturent"
             value={searchText}
             onChange={(e) => {
-              setsearchText(e.target.value);
+              setSearchText(e.target.value);
             }}
           ></input>
-          <button className="search-btn px-4 py-1 rounded-x bg-green-500 " onClick={filterResName}>
+          <button className="search-btn md:px-4 py-1 rounded-xl bg-green-500 " onClick={filterResName}>
             Search Resturent
           </button>
-          <button className="search-btn ml-4 px-4 py-1 rounded-xl bg-slate-400" onClick={ratingFilter}>
+          <button className="search-btn md:ml-4 px-4 py-1 rounded-xl bg-slate-400" onClick={ratingFilter}>
           Top restaurants
         </button>
         </div>
       </div>
-      <div className="card-container flex flex-wrap md:ml-[120px] w-full">
+      <div className="card-container flex flex-wrap md:ml-[0px] w-full">
         {filterResCard.map((restaurant) => (
           <Link
             key={restaurant.info.id}
