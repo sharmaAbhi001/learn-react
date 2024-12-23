@@ -1,4 +1,4 @@
-import useResturentCard from "../utils/useResturentCard";
+
 import Card from "./Card";
 import Simmer from "./Simmer";
 import { useEffect, useState } from "react";
@@ -6,18 +6,46 @@ import { Link } from "react-router";
 import useOnlineStatus from "../utils/useOnlineStatus";
 
 const Body = () => {
-  const resCard = useResturentCard();
+ 
+
+   const [resCard,setResCard] = useState([]);
   const [filterResCard, setfilterResCard] = useState([]);
   const [searchText, setsearchText] = useState("");
+  const [error, setError] = useState(null); // Track errors
 
   const onlineStatus = useOnlineStatus();
 
-  useEffect(() => {
-    if (resCard.length > 0) {
-      setfilterResCard(resCard);
-    }
-  }, [resCard]);
 
+  useEffect(() => {
+    fetchCard();
+  }, []);
+
+  const fetchCard = async () => {
+    try {
+      const response = await fetch(
+        "https://www.swiggy.com/dapi/restaurants/list/v5?lat=26.7605545&lng=83.3731675&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING"
+      );
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! Status: ${response.status}`);
+      }
+
+      const json = await response.json();
+      
+      const restaurantData =
+        json.data?.cards[2]?.card?.card?.gridElements?.infoWithStyle?.restaurants;
+         
+        
+        setResCard(restaurantData||[]);
+        setfilterResCard(restaurantData||[])
+    } catch (err) {
+      console.error("Failed to fetch restaurant cards:", err);
+      setError(err.message); // Update error state
+    }
+  };
+
+
+  
   
   if (!onlineStatus) {
     return <h1>Look Like you are offline Check your internet connection</h1>
@@ -63,7 +91,7 @@ const Body = () => {
         </button>
         </div>
       </div>
-      <div className="card-container flex flex-wrap ml-[120px] w-full">
+      <div className="card-container flex flex-wrap md:ml-[120px] w-full">
         {filterResCard.map((restaurant) => (
           <Link
             key={restaurant.info.id}

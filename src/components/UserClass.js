@@ -10,7 +10,6 @@ class UserClass extends React.Component {
      }
     };
 
-    console.log("child constructor");
     
 
   }
@@ -26,9 +25,6 @@ async componentDidMount()
   }
 
   render() {
-
-console.log("child did rendr");
-console.log(this.state.userInfo);
 
     
  const { login, location ,avatar_url } = this.state.userInfo

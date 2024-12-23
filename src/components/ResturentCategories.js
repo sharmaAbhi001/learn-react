@@ -4,12 +4,10 @@ import ItemList from "./ItemList";
 
 const ResturentCategories = ({data,showItem,setShowIndex})=>{
 
-//  console.log(data.itemCards);
 
 const [show2,setShow2] = useState(true);
 
 
- console.log(showItem);
 
  const handelClick = ()=>{
    if(showItem===true)

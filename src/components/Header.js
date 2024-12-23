@@ -14,7 +14,6 @@ const Header = () => {
     };
 
   const cartIems =useSelector((state) => state.cart.items);
-  console.log(cartIems);
   
   const     [toggleButten,settoggleButten]  = useState("Login");
 

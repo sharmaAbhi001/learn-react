@@ -10,11 +10,15 @@ const useResturentMenue = (resId) => {
 
   const fetchMenue = async () => {
     try {
-      const data = await fetch(MENUE_API + resId);
-      const json = await data.json();
+      const url = MENUE_API + resId;
+      const response = await fetch(url);
+      if (!response.ok) {
+        throw new Error(`HTTP error! Status: ${response.status}`);
+      }
+      const json = await response.json();
       setResMenue(json);
     } catch (error) {
-      console.error("Error fetching restaurant data:", error);
+      console.error("Error fetching restaurant data:", error.message);
     }
   };
 

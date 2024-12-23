@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useParams } from "react-router";
+import Simmer from "./Simmer";
 import useResturentMenue from "../utils/useResturentMenue";
 import ResturentCategories from "./ResturentCategories";
 
@@ -14,17 +15,25 @@ const ResturentInfo = () => {
     return <Simmer />;
   }
 
+  
+
   const { name, cuisines, costForTwoMessage } =
     resInfo.data?.cards[2]?.card?.card?.info;
 
   const categories =
-    resInfo?.data?.cards?.[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards.filter(
+    resInfo?.data?.cards?.[5]?.groupedCard?.cardGroupMap?.REGULAR?.cards.filter(
       (c) =>
         c.card?.card?.["@type"] ===
         "type.googleapis.com/swiggy.presentation.food.v2.ItemCategory"
-    );
+    )||[];
 
-  // console.log(categories);
+
+  if(categories ===null)
+  {
+    return <Simmer/>
+  }
+    
+
 
   return (
     <div className="text-center my-6">
