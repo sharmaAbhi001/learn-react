@@ -2,16 +2,14 @@
 
 const Simmer = () =>{
     return(
-        <div className="simmerContainer pl-[55px] flex flex-wrap md:pl-[74px]">
-            <div className="simmerCard w-[300px] h-[300px] bg-gray-200"></div>
-            <div className="simmerCard w-[300px] h-[300px] bg-gray-200"></div>
-            <div className="simmerCard w-[300px] h-[300px] bg-gray-200"></div>
-            <div className="simmerCard w-[300px] h-[300px] bg-gray-200"></div>
-            <div className="simmerCard w-[300px] h-[300px] bg-gray-200"></div>
-            <div className="simmerCard w-[300px] h-[300px] bg-gray-200"></div>
-            <div className="simmerCard w-[300px] h-[300px] bg-gray-200"></div>
-            <div className="simmerCard w-[300px] h-[300px] bg-gray-200"></div>
-            <div className="simmerCard w-[300px] h-[300px] bg-gray-200"></div>
+        <div className="simmerContainer mt-16  flex flex-wrap md:ml-[0px] w-full  space-x-3 space-y-3">
+            <div className="simmerCard p-4 w-[300px] h-[160px] rounded-xl bg-gray-200"></div>
+            <div className="simmerCard p-4 w-[300px] h-[160px] rounded-xl bg-gray-200"></div>
+            <div className="simmerCard p-4 w-[300px] h-[160px] rounded-xl bg-gray-200"></div>
+            <div className="simmerCard p-4 w-[300px] h-[160px] rounded-xl bg-gray-200"></div>
+            <div className="simmerCard p-4 w-[300px] h-[160px] rounded-xl bg-gray-200"></div>
+            <div className="simmerCard p-4 w-[300px] h-[160px] rounded-xl bg-gray-200"></div>
+            <div className="simmerCard p-4 w-[300px] h-[160px] rounded-xl bg-gray-200"></div>
         </div>
     );
 };

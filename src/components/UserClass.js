@@ -17,7 +17,7 @@ class UserClass extends React.Component {
 async componentDidMount()
   {
     
- const data = await fetch("https://api.github.com/users/Prince-singh9554")
+ const data = await fetch("https://api.github.com/users/sharmaAbhi001")
  const json = await data.json();
  this.setState({
     userInfo:json,
@@ -30,10 +30,9 @@ async componentDidMount()
  const { login, location ,avatar_url } = this.state.userInfo
  return (
    <div className="user-about">
-    <img src={avatar_url}></img>
-     <h2>{login}</h2>
+    <img className="mx-auto" src={avatar_url}></img>
+     <h2 className="bold"> username :<span> {login}</span></h2>
      <h3>{location}</h3>
-     <h3>Work</h3>
    </div>)
 
   }
